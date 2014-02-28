@@ -22,6 +22,9 @@ perform =: dyad define
     ".x
 )
 
+select =: dyad define
+    
+
 filter =: dyad define
     (header y) =. (body y)
     row_take =. ".x
@@ -43,6 +46,12 @@ readcsvtab =: csv2table @ readcsv NB. same
 
 NB. Need some type of parser extension here.
 
+numre =. rxcomp '[0-9]*\.*[0-9]*'
+isnum =. numre&rxeq @: deb
+colfirst =. 0&{ each @: body
+
+colsnum =: isnum each @: colfirst
+
 NB. Get some init methods ready for convenience
 load 'data/jdb/northwind'
 test_init =: monad define
@@ -58,5 +67,8 @@ test_examples =: (showx;._2) bind (0 : 0)
     cats where 'CategoryID > 5'
     (< 'Description') sel cats
     (< 'Description') exec cats
+    '(CategoryID * 2); (cut Description)' perform cats where 'CategoryID > 2'
+
+    numre&rxeq each '456'; '123.32'
 )
 
