@@ -22,8 +22,6 @@ perform =: dyad define
     ".x
 )
 
-select =: dyad define
-    
 
 filter =: dyad define
     (header y) =. (body y)
