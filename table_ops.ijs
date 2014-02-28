@@ -50,3 +50,13 @@ test_init =: monad define
     db_init DBPATH
     cats =: Reads__D 'from Categories'
 )
+
+test_examples =: (showx;._2) bind (0 : 0)
+    test_init''
+    'CategoryID * 2' perform cats
+    'CategoryID > 5' filter cats
+    cats where 'CategoryID > 5'
+    (< 'Description') sel cats
+    (< 'Description') exec cats
+)
+
